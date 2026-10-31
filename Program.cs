@@ -5,6 +5,7 @@ using MovieTicketBookingSystem.API.Repositories.Interfaces;
 using MovieTicketBookingSystem.API.Services;
 using MovieTicketBookingSystem.API.Services.Interfaces;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,6 +23,9 @@ builder.Services.AddScoped<IMovieService, MovieService>();
 
 builder.Services.AddScoped<ITheatreRepository, TheatreRepository>();
 builder.Services.AddScoped<ITheatreService, TheatreService>();
+
+builder.Services.AddScoped<IScreenRepository, ScreenRepository>();
+builder.Services.AddScoped<IScreenService, ScreenService>();
 
 var app = builder.Build();
 

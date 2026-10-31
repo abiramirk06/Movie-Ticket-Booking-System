@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MovieTicketBookingSystem.API.Models;
-using MovieTicketBookingSystem.API.Services.Interfaces;
+using MovieTicketBookingSystem.API.Services;
 
 namespace MovieTicketBookingSystem.API.Controllers;
 

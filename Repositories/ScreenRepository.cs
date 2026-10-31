@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieTicketBookingSystem.API.Data;
 using MovieTicketBookingSystem.API.Models;
-using MovieTicketBookingSystem.API.Repositories.Interfaces;
 
 namespace MovieTicketBookingSystem.API.Repositories;
 

@@ -1,6 +1,5 @@
 ﻿using MovieTicketBookingSystem.API.Models;
-using MovieTicketBookingSystem.API.Repositories.Interfaces;
-using MovieTicketBookingSystem.API.Services.Interfaces;
+using MovieTicketBookingSystem.API.Repositories;
 
 namespace MovieTicketBookingSystem.API.Services;
 

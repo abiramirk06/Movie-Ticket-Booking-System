@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace MovieTicketBookingSystem.API.Models;
 
@@ -13,6 +14,6 @@ public class Screen
     [MaxLength(50)]
     public string ScreenName { get; set; } = string.Empty;
 
+    [JsonIgnore]
     public Theatre? Theatre { get; set; }
-    
 }

@@ -164,4 +164,3 @@ C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\ob
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\MovieTicketBookingSystem.genruntimeconfig.cache
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\ref\MovieTicketBookingSystem.dll
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\MovieTicketBookingSystem.sourcelink.json
-C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

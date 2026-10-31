@@ -13,4 +13,5 @@ public class Theatre
     [Required]
     [MaxLength(200)]
     public string Location { get; set; } = string.Empty;
+    public ICollection<Screen> Screens { get; set; } = new List<Screen>();
 }

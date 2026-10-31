@@ -79,6 +79,85 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "MovieTicketBookingSystem.API.Controllers.TheatresController",
+    "Method": "GetAllTheatres",
+    "RelativePath": "api/Theatres",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MovieTicketBookingSystem.API.Controllers.TheatresController",
+    "Method": "CreateTheatre",
+    "RelativePath": "api/Theatres",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "theatre",
+        "Type": "MovieTicketBookingSystem.API.Models.Theatre",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MovieTicketBookingSystem.API.Controllers.TheatresController",
+    "Method": "GetTheatreById",
+    "RelativePath": "api/Theatres/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MovieTicketBookingSystem.API.Controllers.TheatresController",
+    "Method": "UpdateTheatre",
+    "RelativePath": "api/Theatres/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "theatre",
+        "Type": "MovieTicketBookingSystem.API.Models.Theatre",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "MovieTicketBookingSystem.API.Controllers.TheatresController",
+    "Method": "DeleteTheatre",
+    "RelativePath": "api/Theatres/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "MovieTicketBookingSystem.Controllers.WeatherForecastController",
     "Method": "Get",
     "RelativePath": "WeatherForecast",

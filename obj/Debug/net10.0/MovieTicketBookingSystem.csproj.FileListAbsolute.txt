@@ -157,10 +157,11 @@ C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\ob
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\MovieTic.82F76955.Up2Date
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\MovieTicketBookingSystem.dll
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\refint\MovieTicketBookingSystem.dll
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\MovieTicketBookingSystem.pdb
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\MovieTicketBookingSystem.genruntimeconfig.cache
 C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\ref\MovieTicketBookingSystem.dll
+C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\MovieTicketBookingSystem.sourcelink.json
+C:\Users\R. ABIRAMI\Desktop\MovieTicketBookingSystem\MovieTicketBookingSystem\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

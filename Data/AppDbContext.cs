@@ -11,4 +11,5 @@ public class AppDbContext : DbContext
     }
 
     public DbSet<Movie> Movies => Set<Movie>();
+    public DbSet<Theatre> Theatres => Set<Theatre>();
 }

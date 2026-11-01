@@ -32,6 +32,26 @@ public class ShowsController : ControllerBase
         return Ok(show);
     }
 
+    [HttpGet("{id}/seats")]
+    public async Task<IActionResult> GetShowSeats(int id)
+    {
+        var seats = await _service.GetShowSeatsAsync(id);
+
+        if (seats == null)
+            return NotFound(new { message = "Show not found." });
+
+        var result = seats.Select(ss => new
+        {
+            seatId = ss.SeatId,
+            rowName = ss.Seat!.RowName,
+            seatNumber = ss.Seat.SeatNumber,
+            seatType = ss.Seat.SeatType,
+            status = ss.Status
+        });
+
+        return Ok(result);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create(Show show)
     {

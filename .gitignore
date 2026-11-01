@@ -1,0 +1,22 @@
+﻿# Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+
+# Build output
+bin/
+obj/
+
+# NuGet
+packages/
+
+# Logs
+*.log
+
+# Local configuration and secrets
+appsettings.Development.json
+
+# OS files
+.DS_Store
+Thumbs.db

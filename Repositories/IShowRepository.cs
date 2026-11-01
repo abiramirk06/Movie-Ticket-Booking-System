@@ -11,4 +11,6 @@ public interface IShowRepository
     Task<Show> AddAsync(Show show);
     Task UpdateAsync(Show show);
     Task DeleteAsync(Show show);
+
+    Task<List<ShowSeat>> GetShowSeatsAsync(int showId);
 }

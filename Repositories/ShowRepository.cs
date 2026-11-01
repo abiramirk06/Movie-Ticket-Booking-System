@@ -84,4 +84,14 @@ public class ShowRepository : IShowRepository
         _context.Shows.Remove(show);
         await _context.SaveChangesAsync();
     }
+
+    public async Task<List<ShowSeat>> GetShowSeatsAsync(int showId)
+    {
+        return await _context.ShowSeats
+            .Include(ss => ss.Seat)
+            .Where(ss => ss.ShowId == showId)
+            .OrderBy(ss => ss.Seat!.RowName)
+            .ThenBy(ss => ss.Seat!.SeatNumber)
+            .ToListAsync();
+    }
 }

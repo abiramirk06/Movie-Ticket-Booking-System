@@ -52,6 +52,92 @@
         }
       }
     },
+    "/api/Bookings/{id}": {
+      "get": {
+        "tags": [
+          "Bookings"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Bookings": {
+      "post": {
+        "tags": [
+          "Bookings"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBookingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Bookings/{id}/cancel": {
+      "put": {
+        "tags": [
+          "Bookings"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Movies": {
       "get": {
         "tags": [
@@ -608,6 +694,33 @@
         }
       }
     },
+    "/api/Shows/{id}/seats": {
+      "get": {
+        "tags": [
+          "Shows"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Theatres": {
       "get": {
         "tags": [
@@ -750,6 +863,50 @@
   },
   "components": {
     "schemas": {
+      "CreateBookingRequest": {
+        "required": [
+          "showId",
+          "customerName",
+          "customerEmail",
+          "customerPhone",
+          "seatIds"
+        ],
+        "type": "object",
+        "properties": {
+          "showId": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "customerName": {
+            "maxLength": 100,
+            "type": "string"
+          },
+          "customerEmail": {
+            "maxLength": 150,
+            "type": "string"
+          },
+          "customerPhone": {
+            "maxLength": 15,
+            "type": "string"
+          },
+          "seatIds": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        }
+      },
       "Movie": {
         "type": "object",
         "properties": {
@@ -981,6 +1138,9 @@
   "tags": [
     {
       "name": "WeatherForecast"
+    },
+    {
+      "name": "Bookings"
     },
     {
       "name": "Movies"

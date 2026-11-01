@@ -9,4 +9,6 @@ public interface IShowService
     Task<Show> CreateShowAsync(Show show);
     Task<bool> UpdateShowAsync(int id, Show show);
     Task<bool> DeleteShowAsync(int id);
+
+    Task<List<ShowSeat>?> GetShowSeatsAsync(int showId);
 }

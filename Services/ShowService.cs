@@ -98,4 +98,17 @@ public class ShowService : IShowService
 
         return true;
     }
+    public async Task<List<ShowSeat>?> GetShowSeatsAsync(int showId)
+    {
+        if (showId <= 0)
+            return null;
+
+        var show = await _repository.GetByIdAsync(showId);
+
+        if (show == null)
+            return null;
+
+        return await _repository.GetShowSeatsAsync(showId);
+    }
+
 }

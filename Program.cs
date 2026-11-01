@@ -27,6 +27,14 @@ builder.Services.AddScoped<ITheatreService, TheatreService>();
 builder.Services.AddScoped<IScreenRepository, ScreenRepository>();
 builder.Services.AddScoped<IScreenService, ScreenService>();
 
+builder.Services.AddScoped<ISeatRepository, SeatRepository>();
+builder.Services.AddScoped<ISeatService, SeatService>();
+
+// Show dependency injection
+builder.Services.AddScoped<IShowRepository, ShowRepository>();
+builder.Services.AddScoped<IShowService, ShowService>();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

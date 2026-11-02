@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieTicketBookingSystem.API.DTOs;
 using MovieTicketBookingSystem.API.Services;
 
@@ -16,10 +18,22 @@ public class BookingsController : ControllerBase
     }
 
     // GET: api/bookings/1
+    // Customers can view their own bookings.
+    // Admins can view any booking.
+    [Authorize(Roles = "Admin,Customer")]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
-        var booking = await _service.GetBookingByIdAsync(id);
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var isAdmin = User.IsInRole("Admin");
+
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized();
+
+        var booking = await _service.GetBookingByIdAsync(
+            id,
+            userId,
+            isAdmin);
 
         if (booking == null)
             return NotFound(new { message = "Booking not found." });
@@ -28,19 +42,30 @@ public class BookingsController : ControllerBase
     }
 
     // POST: api/bookings
+    // Only authenticated customers can create bookings.
+    [Authorize(Roles = "Customer")]
     [HttpPost]
     public async Task<IActionResult> Create(
         [FromBody] CreateBookingRequest request)
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized();
+
         try
         {
-            var booking = await _service.CreateBookingAsync(request);
+            var booking = await _service.CreateBookingAsync(
+                request,
+                userId);
 
             if (booking == null)
+            {
                 return Conflict(new
                 {
                     message = "Show not found or one or more seats are unavailable."
                 });
+            }
 
             return CreatedAtAction(
                 nameof(GetById),
@@ -54,16 +79,30 @@ public class BookingsController : ControllerBase
     }
 
     // PUT: api/bookings/1/cancel
+    // Customers can cancel their own bookings.
+    // Admins can cancel any booking.
+    [Authorize(Roles = "Admin,Customer")]
     [HttpPut("{id}/cancel")]
     public async Task<IActionResult> Cancel(int id)
     {
-        var cancelled = await _service.CancelBookingAsync(id);
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var isAdmin = User.IsInRole("Admin");
+
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized();
+
+        var cancelled = await _service.CancelBookingAsync(
+            id,
+            userId,
+            isAdmin);
 
         if (!cancelled)
+        {
             return NotFound(new
             {
-                message = "Booking not found or already cancelled."
+                message = "Booking not found, not accessible, or already cancelled."
             });
+        }
 
         return Ok(new
         {

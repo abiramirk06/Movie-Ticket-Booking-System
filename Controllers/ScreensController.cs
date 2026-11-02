@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieTicketBookingSystem.API.Models;
 using MovieTicketBookingSystem.API.Services;
 
@@ -15,12 +17,18 @@ public class ScreensController : ControllerBase
         _service = service;
     }
 
+    // GET: api/screens
+    // Public access
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _service.GetAllScreensAsync());
     }
 
+    // GET: api/screens/1
+    // Public access
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -32,6 +40,9 @@ public class ScreensController : ControllerBase
         return Ok(screen);
     }
 
+    // POST: api/screens
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(Screen screen)
     {
@@ -44,6 +55,9 @@ public class ScreensController : ControllerBase
         );
     }
 
+    // PUT: api/screens/1
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, Screen screen)
     {
@@ -55,6 +69,9 @@ public class ScreensController : ControllerBase
         return NoContent();
     }
 
+    // DELETE: api/screens/1
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

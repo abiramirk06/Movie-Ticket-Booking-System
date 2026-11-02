@@ -13,11 +13,21 @@ public class BookingRepository : IBookingRepository
         _context = context;
     }
 
-    public async Task<Booking?> GetByIdAsync(int id)
+    public async Task<Booking?> GetByIdAsync(
+        int id,
+        string userId,
+        bool isAdmin)
     {
-        return await _context.Bookings
+        var query = _context.Bookings
             .Include(b => b.BookingSeats)
-            .FirstOrDefaultAsync(b => b.BookingId == id);
+            .Where(b => b.BookingId == id);
+
+        if (!isAdmin)
+        {
+            query = query.Where(b => b.UserId == userId);
+        }
+
+        return await query.FirstOrDefaultAsync();
     }
 
     public async Task<Booking?> CreateBookingAsync(
@@ -79,19 +89,31 @@ public class BookingRepository : IBookingRepository
         }
     }
 
-    public async Task<bool> CancelBookingAsync(int bookingId)
+    public async Task<bool> CancelBookingAsync(
+        int bookingId,
+        string userId,
+        bool isAdmin)
     {
         await using var transaction =
             await _context.Database.BeginTransactionAsync();
 
         try
         {
-            var booking = await _context.Bookings
+            var query = _context.Bookings
                 .Include(b => b.BookingSeats)
-                .FirstOrDefaultAsync(b => b.BookingId == bookingId);
+                .Where(b => b.BookingId == bookingId);
+
+            if (!isAdmin)
+            {
+                query = query.Where(b => b.UserId == userId);
+            }
+
+            var booking = await query.FirstOrDefaultAsync();
 
             if (booking == null || booking.Status != "Confirmed")
+            {
                 return false;
+            }
 
             var seatIds = booking.BookingSeats
                 .Select(bs => bs.SeatId)

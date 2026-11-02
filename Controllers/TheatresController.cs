@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieTicketBookingSystem.API.Models;
 using MovieTicketBookingSystem.API.Services.Interfaces;
 
@@ -15,13 +17,20 @@ public class TheatresController : ControllerBase
         _theatreService = theatreService;
     }
 
+    // GET: api/theatres
+    // Public access
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAllTheatres()
     {
         var theatres = await _theatreService.GetAllTheatresAsync();
+
         return Ok(theatres);
     }
 
+    // GET: api/theatres/1
+    // Public access
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetTheatreById(int id)
     {
@@ -33,6 +42,9 @@ public class TheatresController : ControllerBase
         return Ok(theatre);
     }
 
+    // POST: api/theatres
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> CreateTheatre(Theatre theatre)
     {
@@ -44,17 +56,25 @@ public class TheatresController : ControllerBase
             createdTheatre);
     }
 
+    // PUT: api/theatres/1
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateTheatre(int id, Theatre theatre)
     {
         await _theatreService.UpdateTheatreAsync(id, theatre);
+
         return NoContent();
     }
 
+    // DELETE: api/theatres/1
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTheatre(int id)
     {
         await _theatreService.DeleteTheatreAsync(id);
+
         return NoContent();
     }
 }

@@ -40,4 +40,9 @@ public class Booking
 
     public ICollection<BookingSeat> BookingSeats { get; set; }
         = new List<BookingSeat>();
+
+    // Authenticated user who created this booking
+    public string? UserId { get; set; }
+
+    public ApplicationUser? User { get; set; }
 }

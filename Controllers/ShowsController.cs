@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieTicketBookingSystem.API.Models;
 using MovieTicketBookingSystem.API.Services;
 
@@ -15,12 +17,18 @@ public class ShowsController : ControllerBase
         _service = service;
     }
 
+    // GET: api/shows
+    // Public access
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _service.GetAllShowsAsync());
     }
 
+    // GET: api/shows/1
+    // Public access
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -32,6 +40,9 @@ public class ShowsController : ControllerBase
         return Ok(show);
     }
 
+    // GET: api/shows/1/seats
+    // Public access - view available and booked seats
+    [AllowAnonymous]
     [HttpGet("{id}/seats")]
     public async Task<IActionResult> GetShowSeats(int id)
     {
@@ -52,6 +63,9 @@ public class ShowsController : ControllerBase
         return Ok(result);
     }
 
+    // POST: api/shows
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(Show show)
     {
@@ -63,6 +77,9 @@ public class ShowsController : ControllerBase
             createdShow);
     }
 
+    // PUT: api/shows/1
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, Show show)
     {
@@ -74,6 +91,9 @@ public class ShowsController : ControllerBase
         return NoContent();
     }
 
+    // DELETE: api/shows/1
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

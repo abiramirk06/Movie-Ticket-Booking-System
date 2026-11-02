@@ -13,19 +13,29 @@ public class BookingService : IBookingService
         _repository = repository;
     }
 
-    public async Task<BookingResponse?> GetBookingByIdAsync(int id)
+    public async Task<BookingResponse?> GetBookingByIdAsync(
+        int id,
+        string userId,
+        bool isAdmin)
     {
-        if (id <= 0)
+        if (id <= 0 || string.IsNullOrWhiteSpace(userId))
             return null;
 
-        var booking = await _repository.GetByIdAsync(id);
+        var booking = await _repository.GetByIdAsync(
+            id,
+            userId,
+            isAdmin);
 
         return booking == null ? null : MapToResponse(booking);
     }
 
     public async Task<BookingResponse?> CreateBookingAsync(
-        CreateBookingRequest request)
+        CreateBookingRequest request,
+        string userId)
     {
+        if (string.IsNullOrWhiteSpace(userId))
+            throw new ArgumentException("Authenticated user is required.");
+
         if (request.ShowId <= 0 ||
             string.IsNullOrWhiteSpace(request.CustomerName) ||
             string.IsNullOrWhiteSpace(request.CustomerEmail) ||
@@ -43,6 +53,8 @@ public class BookingService : IBookingService
             BookingReference = Guid.NewGuid()
                 .ToString("N")[..20].ToUpperInvariant(),
 
+            UserId = userId,
+
             ShowId = request.ShowId,
             CustomerName = request.CustomerName.Trim(),
             CustomerEmail = request.CustomerEmail.Trim(),
@@ -58,12 +70,18 @@ public class BookingService : IBookingService
             : MapToResponse(createdBooking);
     }
 
-    public async Task<bool> CancelBookingAsync(int id)
+    public async Task<bool> CancelBookingAsync(
+        int id,
+        string userId,
+        bool isAdmin)
     {
-        if (id <= 0)
+        if (id <= 0 || string.IsNullOrWhiteSpace(userId))
             return false;
 
-        return await _repository.CancelBookingAsync(id);
+        return await _repository.CancelBookingAsync(
+            id,
+            userId,
+            isAdmin);
     }
 
     private static BookingResponse MapToResponse(Booking booking)

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MovieTicketBookingSystem.API.Models;
 using MovieTicketBookingSystem.API.Services;
 
@@ -15,12 +17,18 @@ public class SeatsController : ControllerBase
         _service = service;
     }
 
+    // GET: api/seats
+    // Public access
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         return Ok(await _service.GetAllSeatsAsync());
     }
 
+    // GET: api/seats/1
+    // Public access
+    [AllowAnonymous]
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -32,6 +40,9 @@ public class SeatsController : ControllerBase
         return Ok(seat);
     }
 
+    // POST: api/seats
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<IActionResult> Create(Seat seat)
     {
@@ -43,6 +54,9 @@ public class SeatsController : ControllerBase
             createdSeat);
     }
 
+    // PUT: api/seats/1
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, Seat seat)
     {
@@ -54,6 +68,9 @@ public class SeatsController : ControllerBase
         return NoContent();
     }
 
+    // DELETE: api/seats/1
+    // Admin only
+    [Authorize(Roles = "Admin")]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
     {

@@ -17,4 +17,6 @@ public interface IBookingService
         int id,
         string userId,
         bool isAdmin);
+
+    Task<List<BookingResponse>> GetMyBookingsAsync(string userId);
 }

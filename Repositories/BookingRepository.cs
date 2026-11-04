@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MovieTicketBookingSystem.API.Data;
+using MovieTicketBookingSystem.API.DTOs;
 using MovieTicketBookingSystem.API.Models;
 
 namespace MovieTicketBookingSystem.API.Repositories;
@@ -40,9 +41,9 @@ public class BookingRepository : IBookingRepository
         try
         {
             var show = await _context.Shows
-                .FirstOrDefaultAsync(s => s.ShowId == booking.ShowId);
+    .FirstOrDefaultAsync(s => s.ShowId == booking.ShowId);
 
-            if (show == null)
+            if (show == null || show.StartTime <= DateTime.Now)
                 return null;
 
             var showSeats = await _context.ShowSeats
@@ -143,4 +144,15 @@ public class BookingRepository : IBookingRepository
             throw;
         }
     }
+
+    public async Task<List<Booking>> GetMyBookingsAsync(string userId)
+    {
+        return await _context.Bookings
+            .Include(b => b.BookingSeats)
+            .Where(b => b.UserId == userId)
+            .OrderByDescending(b => b.BookingDate)
+            .ToListAsync();
+    }
+
+  
 }

@@ -102,4 +102,15 @@ public class BookingService : IBookingService
                 .ToList()
         };
     }
+    public async Task<List<BookingResponse>> GetMyBookingsAsync(string userId)
+    {
+        if (string.IsNullOrWhiteSpace(userId))
+            return new List<BookingResponse>();
+
+        var bookings = await _repository.GetMyBookingsAsync(userId);
+
+        return bookings
+            .Select(MapToResponse)
+            .ToList();
+    }
 }

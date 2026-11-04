@@ -1,4 +1,5 @@
-﻿using MovieTicketBookingSystem.API.Models;
+﻿using MovieTicketBookingSystem.API.DTOs;
+using MovieTicketBookingSystem.API.Models;
 
 namespace MovieTicketBookingSystem.API.Repositories;
 
@@ -8,6 +9,8 @@ public interface IBookingRepository
         int id,
         string userId,
         bool isAdmin);
+
+    Task<List<Booking>> GetMyBookingsAsync(string userId);
 
     Task<Booking?> CreateBookingAsync(
         Booking booking,

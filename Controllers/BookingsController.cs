@@ -109,4 +109,20 @@ public class BookingsController : ControllerBase
             message = "Booking cancelled successfully."
         });
     }
+
+    // GET: api/bookings/my-bookings
+    // Customer can view only their own bookings.
+    [Authorize(Roles = "Customer")]
+    [HttpGet("my-bookings")]
+    public async Task<IActionResult> GetMyBookings()
+    {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (string.IsNullOrEmpty(userId))
+            return Unauthorized();
+
+        var bookings = await _service.GetMyBookingsAsync(userId);
+
+        return Ok(bookings);
+    }
 }
